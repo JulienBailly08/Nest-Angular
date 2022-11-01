@@ -7,7 +7,7 @@ export class ArticlesController {
   constructor(private readonly articleService: ArticlesService) {}
 
   @Post()
-  createArticle(@Body() article: CreateArticleDto) {
-    this.articleService.create(article);
+  async createArticle(@Body() article: CreateArticleDto) {
+    return this.articleService.create(article);
   }
 }
