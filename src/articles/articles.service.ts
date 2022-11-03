@@ -12,7 +12,12 @@ export class ArticlesService {
   ) {}
 
   async create(createArticleDto: CreateArticleDto): Promise<Article> {
-    const createdArticle = new this.articleModel(createArticleDto);
-    return await createdArticle.save();
+    // const createdArticle = new this.articleModel(createArticleDto);
+    // return await createdArticle.save();
+    return await this.articleModel.create(createArticleDto);
+  }
+
+  async getAll(): Promise<Article[]> {
+    return await this.articleModel.find();
   }
 }
