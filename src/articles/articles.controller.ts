@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
+import { CheckauthorInterceptor } from 'src/checkauthor/checkauthor.interceptor';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 
@@ -7,12 +16,18 @@ export class ArticlesController {
   constructor(private readonly articleService: ArticlesService) {}
 
   @Post()
+  @UseInterceptors(CheckauthorInterceptor)
   async createArticle(@Body() article: CreateArticleDto) {
-    return this.articleService.create(article);
+    return await this.articleService.create(article);
   }
 
   @Get()
   async getArticles() {
-    return this.articleService.getAll();
+    return await this.articleService.getAll();
+  }
+
+  @Delete(':id')
+  async eraseArticle(@Param('id') id: string) {
+    return await this.articleService.erase(id);
   }
 }

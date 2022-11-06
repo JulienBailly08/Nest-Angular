@@ -18,6 +18,9 @@ export class ArticlesService {
   }
 
   async getAll(): Promise<Article[]> {
-    return await this.articleModel.find();
+    return await this.articleModel.find().sort({ createdAt: 'desc' });
+  }
+  async erase(id): Promise<any> {
+    return await this.articleModel.deleteOne({ _id: id });
   }
 }
