@@ -20,7 +20,8 @@ export class ArticlesService {
   async getAll(): Promise<Article[]> {
     return await this.articleModel.find().sort({ createdAt: 'desc' });
   }
-  async erase(id): Promise<any> {
-    return await this.articleModel.deleteOne({ _id: id });
+
+  async erase(id): Promise<Article> {
+    return await this.articleModel.findByIdAndRemove(id);
   }
 }
