@@ -5,11 +5,13 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseInterceptors,
 } from '@nestjs/common';
 import { CheckauthorInterceptor } from 'src/checkauthor/checkauthor.interceptor';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
+import { UpdateArticleDto } from './dto/update-article.dto';
 
 @Controller('articles')
 export class ArticlesController {
@@ -18,16 +20,24 @@ export class ArticlesController {
   @Post()
   @UseInterceptors(CheckauthorInterceptor)
   async createArticle(@Body() article: CreateArticleDto) {
-    return await this.articleService.create(article);
+    return this.articleService.create(article);
   }
 
   @Get()
   async getArticles() {
-    return await this.articleService.getAll();
+    return this.articleService.getAll();
   }
 
   @Delete(':id')
   async eraseArticle(@Param('id') id: string) {
-    return await this.articleService.erase(id);
+    return this.articleService.erase(id);
+  }
+
+  @Put(':id')
+  async updateArticle(
+    @Param('id') id: string,
+    @Body() article: UpdateArticleDto,
+  ) {
+    return this.articleService.update(id, article);
   }
 }
