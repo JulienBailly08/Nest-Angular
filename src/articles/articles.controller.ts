@@ -34,6 +34,7 @@ export class ArticlesController {
   }
 
   @Put(':id')
+  @UseInterceptors(CheckauthorInterceptor)
   async updateArticle(
     @Param('id') id: string,
     @Body() article: UpdateArticleDto,

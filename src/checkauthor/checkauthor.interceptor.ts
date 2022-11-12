@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class CheckauthorInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
-    if (request.body.author == null) {
+    if (request.body.author == null || request.body.author == '') {
       request.body.author = 'Juju B';
     }
     return next.handle();
