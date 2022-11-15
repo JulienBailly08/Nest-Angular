@@ -10,4 +10,7 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<User> {
     return await this.userModel.create(createUserDto);
   }
+  async findOne(email: string): Promise<User> {
+    return await this.userModel.findOne({ email }).exec();
+  }
 }
