@@ -7,9 +7,16 @@ import { UsersModule } from './users/users.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import config from './config';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [MongooseModule.forRoot(config), ArticlesModule, UsersModule, AuthModule],
+  imports: [
+    MongooseModule.forRoot(config.dbCnx),
+    ArticlesModule,
+    UsersModule,
+    AuthModule,
+    JwtModule,
+  ],
   controllers: [AppController],
   providers: [AppService, AuthService],
 })

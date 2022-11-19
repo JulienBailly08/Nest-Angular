@@ -7,6 +7,7 @@ import { User } from './interfaces/user.interface';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
+
   async create(createUserDto: CreateUserDto): Promise<User> {
     return await this.userModel.create(createUserDto);
   }
