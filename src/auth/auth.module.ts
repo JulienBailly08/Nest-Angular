@@ -14,7 +14,7 @@ import { LocalStrategy } from './local.strategy';
     UsersModule,
     JwtModule.register({
       secret: config.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '3600s' },
     }),
   ],
   controllers: [AuthController],
